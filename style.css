@@ -1,0 +1,108 @@
+@font-face {
+  font-family: "MySpecialFont";
+  src: url("fonts/Kmin-Regular.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: pink;
+  font-family: "MySpecialFont", serif;
+}
+
+.container {
+  position: relative;
+  text-align: center;
+}
+
+/* Main heart */
+.heart {
+  width: 25vw;
+  max-width: 120px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+/* Grow and shake on hover (desktop) */
+.heart:hover {
+  transform: scale(1.1);
+  animation: shake 0.5s;
+  animation-iteration-count: 1;
+}
+
+/* Shake keyframes */
+@keyframes shake {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  10% { transform: translate(-2px, 0) rotate(-5deg); }
+  20% { transform: translate(2px, 0) rotate(5deg); }
+  30% { transform: translate(-2px, 0) rotate(-5deg); }
+  40% { transform: translate(2px, 0) rotate(5deg); }
+  50% { transform: translate(-2px, 0) rotate(-5deg); }
+  60% { transform: translate(2px, 0) rotate(5deg); }
+  70% { transform: translate(-2px, 0) rotate(-5deg); }
+  80% { transform: translate(2px, 0) rotate(5deg); }
+  90% { transform: translate(-2px, 0) rotate(-5deg); }
+  100% { transform: translate(0, 0) rotate(0deg); }
+}
+
+/* Shake on mobile/tap */
+.heart.shake {
+  animation: shake 0.5s;
+}
+
+/* Letter (hidden by default) */
+.letter {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  transform-origin: center center;
+  width: 80vw;
+  max-width: 320px;
+  padding: 20px;
+  background: #fff;
+  border: 3px solid crimson;
+  border-radius: 12px;
+  box-shadow: 0px 6px 15px rgba(0,0,0,0.2);
+  /* keep container centered, but we will left-align the text inside */
+  text-align: left;
+  transition: transform 0.5s ease;
+  overflow: visible; /* allow the bottom heart to be visible outside the letter */
+}
+
+/* Visible letter */
+.letter.show {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+/* Letter text: left aligned and readable */
+#message {
+  font-size: 60px;       /* smaller and more readable than 48px */
+  line-height: .75;
+  color: #333;
+  text-align: left;      /* <-- this makes the letter text left-aligned */
+  margin: 0;             /* remove default margins so spacing is consistent */
+}
+
+/* Bottom heart: centered at the bottom stroke of the letter */
+.close-heart {
+  width: 12vw;
+  max-width: 60px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  position: absolute;                /* position relative to .letter (which is positioned) */
+  left: 50%;                         /* center horizontally */
+  transform: translateX(-50%);       /* perfect horizontal centering */
+  bottom: -30px;                     /* move it so its center intersects the letter bottom stroke */
+  /* if you want it to sit exactly on the stroke line, use bottom: - (height/2) */
+}
+
+.close-heart:hover {
+  transform: translateX(-50%) scale(1.1);
+}
+
